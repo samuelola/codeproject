@@ -4,9 +4,10 @@
 @section('content')
    
   <h1>Create Users</h1>
+ 
+@include('includes.form_errors')
 
-
- {!!Form::open(['method'=>'POST' , 'action'=>'AdminUsersController@store']) !!}
+ {!!Form::open(['method'=>'POST' , 'action'=>'AdminUsersController@store' , 'files'=>true]) !!}
 
    <div class="form-group">
    	     {!!Form::label('name', 'Name') !!}
@@ -31,7 +32,12 @@
 
    <div class="form-group">
    	    {!!Form::label('is_active','Status')!!}
-   	    {!!Form::select('is_active',[1=>'Active', 0 =>'Not Active'], 0 ,['class'=>'form-control'])!!}
+   	    {!!Form::select('is_active',[''=>'Select Options',1=>'Active', 0 =>'Not Active'],null ,['class'=>'form-control'])!!}
+   </div>
+
+   <div class="form-group">
+   	   {!!Form::label('file','Upload Photo')!!}
+   	   {!!Form::file('file',null,['class'=>'form-control'])!!}
    </div>
 
    <div class="form-group">
