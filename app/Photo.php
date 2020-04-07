@@ -8,4 +8,13 @@ class Photo extends Model
 {
     
     protected $fillable = ['file'] ;
+
+    protected $uploads = '/images/';
+
+
+
+    public function getFileAttribute($sam){
+
+        return $this->uploads.$sam;
+    }
 }

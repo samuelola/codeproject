@@ -8,8 +8,7 @@
     <title>Laravel</title>
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
+   <link href="{{asset('font-awesome-4.7.0/css/font-awesome.css')}}" rel="stylesheet">
 
     <!-- Styles -->
       <link rel="stylesheet" href="{{asset('css/libs/bootstrap.min.css')}}">
@@ -63,6 +62,8 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{url('/admin')}}"><i class="fa fa-btn fa-user"></i>Admin</a></li>
+                                <li class="divider"></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
