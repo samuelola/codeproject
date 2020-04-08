@@ -8,9 +8,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UsersRequest;
 use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
+
 
 class AdminUsersController extends Controller
 {
+    
+    public function __construct(){
+
+        $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +28,7 @@ class AdminUsersController extends Controller
     {
 
         $users = User::all();
+
         return view('admin.users.index',compact('users'));
     }
 
@@ -65,6 +74,9 @@ class AdminUsersController extends Controller
 
     
          User::create($input);
+
+
+         Session::flash('create_user','User has beeen created!');
 
          return redirect()->route('admin.users.index');
 
@@ -134,6 +146,8 @@ class AdminUsersController extends Controller
 
         $user->update($input);
 
+        Session::flash('update_user','User has been updated!');
+
         return redirect()->route('admin.users.index');
     }
 
@@ -145,6 +159,19 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $user = User::findOrFail($id);
+
+         unlink(public_path() . $user->photo->file);
+
+        // unlink(public_path() ."/images/".$user->photo->file);
+
+
+         Photo::where('id',$user->photo_id)->delete();
+
+         $user->delete();
+
+         Session::flash('user_deleted', 'The user has been deleted!');
+
+         return redirect()->route('admin.users.index');
     }
 }

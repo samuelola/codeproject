@@ -2,6 +2,8 @@
 
 
 @section('content')
+
+@include('includes.message')
   
   <h1>Users</h1>
 
@@ -33,6 +35,17 @@
              <td>{{$user->created_at->diffForHumans()}}</td>
              <td>{{$user->updated_at->diffForHumans()}}</td>
              <td><a class="btn btn-primary btn-xs" href="{{route('admin.users.edit',$user->id)}}">Edit</a></td>
+             <td>
+              {!!Form::model($user , ['method'=>'DELETE' , 'action'=>['AdminUsersController@destroy',$user->id] , 'files'=>true]) !!}
+
+                
+                {!!Form::submit('Delete',['class'=>'btn btn-danger btn-xs'])!!}
+                  
+
+              {!! Form::close() !!} 
+
+            </td>
+             
            </tr>
 
       	@endforeach

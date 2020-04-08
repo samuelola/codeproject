@@ -38,5 +38,19 @@ class User extends Authenticatable
     }
 
 
+    // this is to check if the user is an admin
+    public function isAdmin(){
+
+        if($this->role->name == 'administrator' && $this->is_active == 1){
+           
+           return true;
+        }
+
+
+         return false;
+
+    }
+
+
 
 }
