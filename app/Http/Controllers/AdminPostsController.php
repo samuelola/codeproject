@@ -9,9 +9,13 @@ use App\Http\Requests\UserPostRequest;
 
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Session;
+
 use App\Post;
 
 use App\Photo;
+
+use App\Category;
 
 class AdminPostsController extends Controller
 {
@@ -34,8 +38,10 @@ class AdminPostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.posts.create');
+    {   
+
+        $categories = Category::lists('name','id')->all();
+        return view('admin.posts.create',compact('categories'));
     }
 
     /**
@@ -60,11 +66,13 @@ class AdminPostsController extends Controller
             $input['photo_id'] = $photo->id;
         }
 
+
+
         $user = Auth::user();
 
         $user->posts()->create($input);
 
-        
+        Session::flash('the_post', 'Post has been inserted!');
          
         return redirect()->route('admin.posts.index'); 
            

@@ -21,3 +21,14 @@
    </div> 
 
 @endif
+
+
+@if(Session::has('the_post'))
+
+  <div class="alert alert-success">
+  	 
+  	 {{Session('the_post')}}
+
+  </div>
+
+@endif
