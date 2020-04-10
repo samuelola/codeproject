@@ -12,6 +12,11 @@ body {
     padding-top: 0px;
 }
 
+
+input[type="file"] {
+    display: block;
+}
+
 #wrapper {
     width: 100%;
 }
